@@ -16,6 +16,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -27,6 +30,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 
 import { UserLibModule } from '@tuxedo-utils/user-lib';
+import { errorMessageReducer } from './reducers/error-message.reducer';
 
 
 @NgModule({
@@ -56,6 +60,8 @@ import { UserLibModule } from '@tuxedo-utils/user-lib';
     MatTableModule,
     MatSnackBarModule,
     UserLibModule,
+    StoreModule.forRoot({ errorMessage: errorMessageReducer }),
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptorService, multi: true },
