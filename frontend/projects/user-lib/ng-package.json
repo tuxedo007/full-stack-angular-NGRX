@@ -6,6 +6,8 @@
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
       "lodash-es": "lodash-es",
+      "@ngrx/store": "ngrx-store",
+      "@ngrx/effects": "ngrx-effects",
       "@tuxedo-utils/shared-lib": "@tuxedo-utils/shared-lib"
     }
   }

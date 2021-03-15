@@ -5,11 +5,16 @@
 
 export * from './lib/user-lib.module';
 
+export * from './lib/actions/current-user.actions';
+// export * from './lib/reducers/current-user.reducer';
+export * from './lib/selectors/current-user.selectors';
+
 export * from './lib/components/change-password-form/change-password-form.component';
 export * from './lib/components/current-user/current-user.component';
 export * from './lib/components/login-form/login-form.component';
 export * from './lib/components/user-profile/user-profile.component';
 
+export * from './lib/models/UserLibState';
 export * from './lib/models/ChangePasswordForm';
 export * from './lib/models/CurrentUser';
 export * from './lib/models/LoginForm';

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { UsersService } from '@tuxedo-utils/user-lib';
+import { AppState } from '../../models/AppState';
+import { ICurrentUser, selectCurrentUser, UsersService } from '@tuxedo-utils/user-lib';
 import { ChangePasswordForm } from '@tuxedo-utils/user-lib';
 
 @Component({
@@ -10,7 +13,12 @@ import { ChangePasswordForm } from '@tuxedo-utils/user-lib';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(public usersSvc: UsersService) { }
+  public currentUser$: Observable<ICurrentUser> = this.store.pipe(select(selectCurrentUser));
+
+  constructor(
+    public usersSvc: UsersService,
+    private store: Store<AppState>,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +31,7 @@ export class ProfileComponent implements OnInit {
     this.usersSvc.changePassword(
       username, userKind,
       changePasswordForm.currentPassword,
+      // tslint:disable-next-line: deprecation
       changePasswordForm.newPassword).subscribe();
   }
 

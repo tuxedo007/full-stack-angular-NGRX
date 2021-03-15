@@ -1,7 +1,14 @@
 
 import { intersection } from 'lodash-es';
 
-export class CurrentUser {
+export interface ICurrentUser {
+  username: string;
+  userKind: string;
+  displayName: string;
+  roles: string[];
+}
+
+export class CurrentUser implements ICurrentUser {
 
   public username: string;
   public userKind: string;
@@ -16,7 +23,7 @@ export class CurrentUser {
   }
 
   public addRole(roleName: string): CurrentUser {
-    if (!roleName) throw new Error('role name cannot be empty');
+    if (!roleName) { throw new Error('role name cannot be empty'); }
     this.roles.push(roleName);
     return this;
   }

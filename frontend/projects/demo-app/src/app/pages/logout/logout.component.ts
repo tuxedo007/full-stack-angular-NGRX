@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
-import { UsersService } from '@tuxedo-utils/user-lib';
+import { logoutUser, UsersService } from '@tuxedo-utils/user-lib';
+import { AppState } from '../../models/AppState';
 
 @Component({
   selector: 'app-logout',
@@ -10,10 +12,15 @@ import { UsersService } from '@tuxedo-utils/user-lib';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private usersSvc: UsersService, private router: Router) { }
+  constructor(
+    private usersSvc: UsersService,
+    private router: Router,
+    private store: Store<AppState>,
+  ) { }
 
   ngOnInit(): void {
     this.usersSvc.logoutUser();
+    this.store.dispatch(logoutUser());
     this.router.navigateByUrl('/');
   }
 

@@ -13,12 +13,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
 import { CurrentUserComponent } from './components/current-user/current-user.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { currentUserReducer } from './reducers/current-user.reducer';
+import { CurrentUserEffects } from './effects/current-user.effects';
+
+
+export const StoreFeatureModule = StoreModule.forFeature('user', { currentUser: currentUserReducer });
+export const EffectFeatureModule = EffectsModule.forFeature([CurrentUserEffects]);
 
 @NgModule({
   declarations: [
@@ -42,6 +51,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MatMenuModule,
     MatTableModule,
     MatSnackBarModule,
+    StoreFeatureModule,
+    EffectFeatureModule,
   ],
   exports: [
     ChangePasswordFormComponent,
